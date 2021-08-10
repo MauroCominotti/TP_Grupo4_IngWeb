@@ -5,6 +5,9 @@
 ### Entrega 0
 1. Integrantes y repositorio: Deben enviar al grupo de la cátedra un mail indicando el número de grupo, los integrantes de cada grupo y el enlace al repositorio donde realizarán las entregas.
 
+Mauro Cominotti, Pedro Fassaneli, Juan Pablo Carena
+https://github.com/MauroCominotti/TP_Grupo4_IngWeb
+
 2. Validación de la idea: Proponer en el grupo de la cátedra una idea de aplicación/sitio/comunidad que quieran desarrollar durante el transcurso de la asignatura. Los docentes tienen que aceptar la idea.
 
 Propuesta 1: SiembraYA
