@@ -36,6 +36,11 @@ namespace RafaelaColabora
                     .AddDefaultUI()
                     .AddDefaultTokenProviders();
             services.AddControllersWithViews();
+            services.AddAuthorizationCore(options =>
+            {
+                options.AddPolicy("SuperAdminOnly", policy => policy.RequireRole("SuperAdmin"));
+                options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
+            });
             services.AddRazorPages();
         }
 
