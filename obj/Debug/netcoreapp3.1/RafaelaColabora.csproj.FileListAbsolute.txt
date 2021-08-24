@@ -1,4 +1,3 @@
-C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\obj\Debug\netcoreapp3.1\RafaelaColabora.csproj.AssemblyReference.cache
 C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\obj\Debug\netcoreapp3.1\RafaelaColabora.AssemblyInfoInputs.cache
 C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\obj\Debug\netcoreapp3.1\RafaelaColabora.AssemblyInfo.cs
 C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\obj\Debug\netcoreapp3.1\RafaelaColabora.csproj.CoreCompileInputs.cache
@@ -6,6 +5,8 @@ C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\obj\Debug\netc
 C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\obj\Debug\netcoreapp3.1\RafaelaColabora.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\obj\Debug\netcoreapp3.1\RafaelaColabora.RazorAssemblyInfo.cache
 C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\obj\Debug\netcoreapp3.1\RafaelaColabora.RazorAssemblyInfo.cs
+C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\bin\Debug\netcoreapp3.1\appsettings-default.Development.json
+C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\bin\Debug\netcoreapp3.1\appsettings-default.json
 C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\bin\Debug\netcoreapp3.1\RafaelaColabora.StaticWebAssets.xml
@@ -203,3 +204,4 @@ C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\obj\Debug\netc
 C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\obj\Debug\netcoreapp3.1\RafaelaColabora.dll
 C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\obj\Debug\netcoreapp3.1\RafaelaColabora.pdb
 C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\obj\Debug\netcoreapp3.1\RafaelaColabora.genruntimeconfig.cache
+C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\obj\Debug\netcoreapp3.1\RafaelaColabora.csproj.AssemblyReference.cache
