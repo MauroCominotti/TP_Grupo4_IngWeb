@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;using RafaelaColabora.Models;
+using Microsoft.AspNetCore.Identity;
+using RafaelaColabora.Models;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -42,7 +43,7 @@ namespace RafaelaColabora.Areas.Identity.Pages.Account
 
             Email = email;
             // Once you add a real email sender, you should remove this code that lets you confirm the account
-            DisplayConfirmAccountLink = true;
+            DisplayConfirmAccountLink = false;
             if (DisplayConfirmAccountLink)
             {
                 var userId = await _userManager.GetUserIdAsync(user);

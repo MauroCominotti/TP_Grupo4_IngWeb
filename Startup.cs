@@ -3,12 +3,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RafaelaColabora.Data;
 using RafaelaColabora.Models;
+using RafaelaColabora.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,12 +37,15 @@ namespace RafaelaColabora
                     .AddEntityFrameworkStores<ApplicationDbContext>()
                     .AddDefaultUI()
                     .AddDefaultTokenProviders();
+            services.AddTransient<IEmailSender, EmailSender>();
             services.AddControllersWithViews();
             services.AddAuthorizationCore(options =>
             {
                 options.AddPolicy("SuperAdminOnly", policy => policy.RequireRole("SuperAdmin"));
                 options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
             });
+            services.Configure<DataProtectionTokenProviderOptions>(o =>
+                o.TokenLifespan = TimeSpan.FromHours(3));
             services.AddRazorPages();
         }
 
