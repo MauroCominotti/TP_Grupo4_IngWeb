@@ -32,7 +32,7 @@ namespace RafaelaColabora
         {
             services.AddDbContext<ApplicationDbContext>(options => 
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("AzureRafaelaColaboraConnection")));
+                    Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<ApplicationUser, IdentityRole>()
                     .AddEntityFrameworkStores<ApplicationDbContext>()
                     .AddDefaultUI()
