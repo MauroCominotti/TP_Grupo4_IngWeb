@@ -204,3 +204,9 @@ C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\obj\Debug\netc
 C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\obj\Debug\netcoreapp3.1\RafaelaColabora.dll
 C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\obj\Debug\netcoreapp3.1\RafaelaColabora.pdb
 C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\obj\Debug\netcoreapp3.1\RafaelaColabora.genruntimeconfig.cache
+C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\obj\Debug\netcoreapp3.1\RafaelaColabora.csproj.AssemblyReference.cache
+C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\obj\Debug\netcoreapp3.1\Razor\Views\Likes\Create.cshtml.g.cs
+C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\obj\Debug\netcoreapp3.1\Razor\Views\Likes\Delete.cshtml.g.cs
+C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\obj\Debug\netcoreapp3.1\Razor\Views\Likes\Details.cshtml.g.cs
+C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\obj\Debug\netcoreapp3.1\Razor\Views\Likes\Edit.cshtml.g.cs
+C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\obj\Debug\netcoreapp3.1\Razor\Views\Likes\Index.cshtml.g.cs
