@@ -10,6 +10,8 @@
     <Compile Remove="Migrations\20210908021351_Updated RafaelaColabora DB Model.Designer.cs" />
     <Compile Remove="Migrations\20210908032719_MigrationName.cs" />
     <Compile Remove="Migrations\20210908032719_MigrationName.Designer.cs" />
+    <Compile Remove="Migrations\20210916215544_update-category-post-relation.cs" />
+    <Compile Remove="Migrations\20210916215544_update-category-post-relation.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
