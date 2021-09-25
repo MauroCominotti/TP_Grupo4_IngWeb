@@ -1,5 +1,7 @@
-﻿using System;
+﻿using RafaelaColabora.Enums;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
@@ -14,7 +16,7 @@ namespace RafaelaColabora.Models
         public int Id { get; set; }
         public int PostId { get; set; }
         public string UserId { get; set; }
-        public string State { get; set; }
+        public State State { get; set; }
         public string Body { get; set; }
         public DateTime CreatedAt { get; set; }
 

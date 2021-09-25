@@ -14,17 +14,20 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="UserId" class="control-label"></label>
-                <select asp-for="UserId" class ="form-control" asp-items="ViewBag.FKUserId"></select>
+                <select asp-for="UserId" class="form-control" asp-items="ViewBag.FKUserId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="CategoryId" class="control-label"></label>
                 <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.FKCategoryId"></select>
             </div>
-            <div class="form-group">
+            @*Ejemplo de como mostrar el estado del posteo, se usará luego para los Moderadores*@
+            @*<div class="form-group">
                 <label asp-for="State" class="control-label"></label>
-                <input asp-for="State" class="form-control" />
+                <select asp-for="State" class="form-control" asp-items="Html.GetEnumSelectList<RafaelaColabora.Enums.State>()">
+                    <option>Seleccione el estado:</option>
+                </select>
                 <span asp-validation-for="State" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
                 <input asp-for="Description" class="form-control" />

@@ -12,7 +12,6 @@ namespace RafaelaColabora.Models
         public int Id { get; set; }
         public int PostId { get; set; }
         public string UserId { get; set; }
-        public string State { get; set; }
         public DateTime CreatedAt { get; set; }
 
         public virtual Post Post { get; set; }

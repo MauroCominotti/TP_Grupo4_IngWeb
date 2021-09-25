@@ -10,7 +10,7 @@ namespace RafaelaColabora.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) {}
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         public virtual DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public virtual DbSet<Category> Category { get; set; }
@@ -28,6 +28,12 @@ namespace RafaelaColabora.Data
             builder.Entity<ApplicationUser>(entity =>
             {
                 entity.ToTable(name: "ApplicationUser");
+
+                entity.Property(e => e.State)
+                    .HasConversion<string>()
+                    .IsRequired()
+                    .HasDefaultValue(Enums.State.Active)
+                    .HasMaxLength(20);
             });
             builder.Entity<Category>(entity =>
             {
@@ -56,7 +62,9 @@ namespace RafaelaColabora.Data
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.State)
+                    .HasConversion<string>()
                     .IsRequired()
+                    .HasDefaultValue(Enums.State.Active)
                     .HasMaxLength(20);
 
                 entity.Property(e => e.Texto)
@@ -90,8 +98,10 @@ namespace RafaelaColabora.Data
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.State)
+                    .HasConversion<string>()
                     .IsRequired()
-                    .HasMaxLength(100);
+                    .HasDefaultValue(Enums.State.Active)
+                    .HasMaxLength(20);
 
                 entity.Property(e => e.UserId)
                     .IsRequired()
@@ -109,10 +119,6 @@ namespace RafaelaColabora.Data
                 entity.Property(e => e.CreatedAt)
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.State)
-                    .IsRequired()
-                    .HasMaxLength(100);
 
                 entity.Property(e => e.UserId).HasMaxLength(450);
 
@@ -140,6 +146,12 @@ namespace RafaelaColabora.Data
                 entity.Property(e => e.Links).HasMaxLength(255);
 
                 entity.Property(e => e.Phone).HasMaxLength(50);
+
+                entity.Property(e => e.State)
+                    .HasConversion<string>()
+                    .IsRequired()
+                    .HasDefaultValue(Enums.State.Active)
+                    .HasMaxLength(20);
 
                 entity.Property(e => e.UserId)
                     .IsRequired()
@@ -180,8 +192,10 @@ namespace RafaelaColabora.Data
                 entity.Property(e => e.Phone).HasMaxLength(50);
 
                 entity.Property(e => e.State)
+                    .HasConversion<string>()
                     .IsRequired()
-                    .HasMaxLength(100);
+                    .HasDefaultValue(Enums.State.Active)
+                    .HasMaxLength(20);
 
                 entity.Property(e => e.UserId)
                     .IsRequired()

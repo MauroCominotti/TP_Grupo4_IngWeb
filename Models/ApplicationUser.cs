@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using RafaelaColabora.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,6 +23,8 @@ namespace RafaelaColabora.Models
         public string Cuil { get; set; }
         public int UsernameChangeLimit { get; set; } = 10;
         public byte[] ProfilePicture { get; set; }
+        public State State { get; set; }
+
 
         public virtual ICollection<Claim> Claims { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }

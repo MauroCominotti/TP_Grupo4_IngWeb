@@ -1,5 +1,7 @@
-﻿using System;
+﻿using RafaelaColabora.Enums;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
@@ -18,6 +20,8 @@ namespace RafaelaColabora.Models
         public string Links { get; set; }
         public string Phone { get; set; }
         public byte[] Photo { get; set; }
+        public State State { get; set; }
+
 
         public virtual Category Category { get; set; }
         public virtual ApplicationUser User { get; set; }
