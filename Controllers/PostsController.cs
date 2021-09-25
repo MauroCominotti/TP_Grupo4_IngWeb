@@ -66,7 +66,8 @@ namespace RafaelaColabora.Controllers
         // GET: Posts/Create
         public IActionResult Create()
         {
-            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
+            ViewData["FKUserId"] = new SelectList(_context.ApplicationUsers, "Id", "UserName");
+            ViewData["FKCategoryId"] = new SelectList(_context.Category, "Id", "Description");
             return View();
         }
 
