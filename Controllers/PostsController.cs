@@ -24,7 +24,7 @@ namespace RafaelaColabora.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Posts.Include(p => p.User);       
+            var applicationDbContext = _context.Posts.Include(p => p.User).Include(p => p.Category);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -32,7 +32,7 @@ namespace RafaelaColabora.Controllers
         [HttpPost()]
         public async Task<ActionResult> Search(string cadena)
         {
-            var applicationDbContext = _context.Posts.Include(p => p.User);
+            var applicationDbContext = _context.Posts.Include(p => p.User).Include(p => p.Category);
 
             if ((cadena == "") || (cadena == null))
             {
