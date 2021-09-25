@@ -25,8 +25,8 @@ namespace RafaelaColabora
                 try
                 {
                     var context = services.GetRequiredService<ApplicationDbContext>();
-                    //ContextSeed.SeedCategories(context);
-                    //TODO: see seeding the Categories
+                    context.Database.EnsureCreated();
+                    ContextSeed.SeedCategories(context);
                     var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
                     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
                     await ContextSeed.SeedRolesAsync(roleManager);

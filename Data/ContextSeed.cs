@@ -21,76 +21,22 @@ namespace RafaelaColabora.Data
 
         public static void SeedCategories(ApplicationDbContext context)
         {
-            context.Database.EnsureCreated();
             // Look for any students.
-            if (context.Categories.Any())
+            if (context.Category.Any())
             {
                 return;   // DB has been seeded
             }
-            //var categories = new Category[]
-            //{
-            //    new Category{ Description= Enums.Categories.Comida.ToString() },
-            //    new Category{ Description= Enums.Categories.Eventos.ToString() },
-            //    new Category{ Description= Enums.Categories.Ropa.ToString() }
-            //};
-            //foreach (Category c in categories)
-            //{
-            //    context.Categories.Add(c);
-            //}
-
-            //var category1 = new Category { Description = Enums.Categories.Comida.ToString() };
-            //var category2 = new Category { Description = Enums.Categories.Eventos.ToString() };
-            //var category3 = new Category { Description = Enums.Categories.Ropa.ToString() };
-
-            ////Seed Categories
-            //context.Categories.Add(category1);
-            //context.SaveChanges();
-            //context.Categories.Add(category2);
-            //context.SaveChanges();
-            //context.Categories.Add(category3);
-            //context.SaveChanges();
-
-
-
-            var category1 = new Category { Description = Enums.Categories.Comida.ToString() };
-            var category2 = new Category { Description = Enums.Categories.Eventos.ToString() };
-            var category3 = new Category { Description = Enums.Categories.Ropa.ToString() };
-
-            //Seed Categories
-            context.Categories.Add(category1);
-            context.Categories.Add(category2);
-            context.Categories.Add(category3);
+            var categories = new Category[]
+            {
+                new Category{ Description= Enums.Categories.Comida.ToString() },
+                new Category{ Description= Enums.Categories.Eventos.ToString() },
+                new Category{ Description= Enums.Categories.Ropa.ToString() }
+            };
+            foreach (Category c in categories)
+            {
+                context.Category.Add(c);
+            }
             context.SaveChanges();
-
-
-
-
-            //Seed Categories
-            //context.Categories.AddAsync(new Category{ Description = Enums.Categories.Comida.ToString() });
-            //context.SaveChanges();
-            //context.Categories.AddAsync(new Category{ Description = Enums.Categories.Eventos.ToString() });
-            //context.SaveChanges();
-            //context.Categories.AddAsync(new Category{ Description = Enums.Categories.Ropa.ToString() });
-            //context.SaveChanges();
-
-            //using (var transaction = context.Database.BeginTransaction())
-            //{
-            //    context.Categories.Add(new Category() { Description = Enums.Categories.Comida.ToString() });
-            //    context.Categories.Add(new Category() { Description = Enums.Categories.Eventos.ToString() });
-            //    context.Categories.Add(new Category() { Description = Enums.Categories.Ropa.ToString() });
-
-            //    context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Category ON;");
-            //    context.SaveChanges();
-            //    context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Category OFF;");
-            //    transaction.Commit();
-            //}
-
-            //context.Categories.AddRange(
-            //    new Category {  Description = Enums.Categories.Comida.ToString() },
-            //    new Category {  Description = Enums.Categories.Eventos.ToString() },
-            //    new Category {  Description = Enums.Categories.Ropa.ToString() }
-            //    );
-            //context.SaveChanges();
         }
 
         public static async Task SeedSuperAdminAsync(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)

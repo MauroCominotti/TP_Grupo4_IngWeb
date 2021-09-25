@@ -21,34 +21,28 @@ namespace RafaelaColabora.Controllers
         }
 
         // GET: Posts
-        [HttpPost]
-        public async Task<IActionResult> Index(string cadena)
-        {
-            //var applicationDbContext = _context.Posts.Include(p => p.User);
-            var applicationDbContext = _context.Posts.Include(p => p.User);
-
-            if ((cadena == "")||(cadena == null))
-            {
-                return View(await applicationDbContext.ToListAsync());
-            }
-            else
-            {
-                return View(await applicationDbContext.Where(p => p.Description.Contains(cadena)).ToListAsync());
-            }
-
-
-        }
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Posts.Include(p => p.User);
-
-       
+            var applicationDbContext = _context.Posts.Include(p => p.User);       
             return View(await applicationDbContext.ToListAsync());
-        
         }
 
+        // GET: Posts/Search/:cadena
+        [HttpPost()]
+        public async Task<ActionResult> Search(string cadena)
+        {
+            var applicationDbContext = _context.Posts.Include(p => p.User);
 
+            if ((cadena == "") || (cadena == null))
+            {
+                return StatusCode(200, await applicationDbContext.ToListAsync());
+            }
+            else
+            {
+                return StatusCode(200, await applicationDbContext.Where(p => p.Description.Contains(cadena)).ToListAsync());
+            }
+        }
 
         // GET: Posts/Details/5
         public async Task<IActionResult> Details(int? id)

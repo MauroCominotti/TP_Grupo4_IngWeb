@@ -13,7 +13,7 @@ namespace RafaelaColabora.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) {}
 
         public virtual DbSet<ApplicationUser> ApplicationUsers { get; set; }
-        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Claim> Claims { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Like> Likes { get; set; }
@@ -32,8 +32,6 @@ namespace RafaelaColabora.Data
             builder.Entity<Category>(entity =>
             {
                 entity.ToTable("Category", "Identity");
-
-                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.CreatedAt)
                     .HasColumnType("datetime")
@@ -133,6 +131,10 @@ namespace RafaelaColabora.Data
             {
                 entity.ToTable("News", "Identity");
 
+                entity.Property(e => e.CategoryId)
+                    .IsRequired()
+                    .HasMaxLength(450);
+
                 entity.Property(e => e.Description).HasMaxLength(255);
 
                 entity.Property(e => e.Links).HasMaxLength(255);
@@ -161,6 +163,10 @@ namespace RafaelaColabora.Data
 
                 entity.Property(e => e.AlternativePhone).HasMaxLength(50);
 
+                entity.Property(e => e.CategoryId)
+                    .IsRequired()
+                    .HasMaxLength(450);
+
                 entity.Property(e => e.CreatedAt)
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
@@ -180,6 +186,11 @@ namespace RafaelaColabora.Data
                 entity.Property(e => e.UserId)
                     .IsRequired()
                     .HasMaxLength(450);
+
+                entity.HasOne(d => d.Category)
+                    .WithMany(p => p.Posts)
+                    .HasForeignKey(d => d.CategoryId)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Posts)
