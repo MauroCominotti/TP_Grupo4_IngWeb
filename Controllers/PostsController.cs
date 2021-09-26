@@ -29,6 +29,22 @@ namespace RafaelaColabora.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
+        // GET: Posts/:cadena
+        [HttpPost()]
+        public async Task<ActionResult> Index(string cadena)
+        {
+            var applicationDbContext = _context.Posts.Include(p => p.User).Include(p => p.Category);
+
+            if ((cadena == "") || (cadena == null))
+            {
+                return View(await applicationDbContext.ToListAsync());
+            }
+            else
+            {
+                return View(await applicationDbContext.Where(p => p.Description.Contains(cadena)).ToListAsync());
+            }
+        }
+
         // GET: Posts/Search/:cadena
         [HttpPost()]
         public async Task<ActionResult> Search(string cadena)

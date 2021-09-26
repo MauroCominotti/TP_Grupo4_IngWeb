@@ -1,6 +1,4 @@
-﻿
-
-@model IEnumerable<RafaelaColabora.Models.Post>
+﻿@model IEnumerable<RafaelaColabora.Models.Post>
 
 @{
     ViewData["Title"] = "Rafaela Colabora";
@@ -8,17 +6,18 @@
 
 <h1>Rafaela Colabora</h1>
 
-<div class="pull-right">
-    @using (Html.BeginForm("Index", "Posts", FormMethod.Post))
-    {
-        <div>
-            @Html.TextBox("cadena", "", new { @class = "form-control" })
-            <button type="submit" class="btn-danger">Buscar</button>
+@using (Html.BeginForm("Index", "Posts", FormMethod.Post, new { @class = "d-flex" }))
+{
+    <div class="input-group">
+        @Html.TextBox("cadena", "", new { @class = "form-control my-0 py-1 lime-border", @placeholder = "Search", @ariaLabel = "Search" })
+        <div class="input-group-append mr-3">
+            <span class="input-group-text">
+                <i class="fas fa-search" aria-hidden="true"></i>
+            </span>
         </div>
-    }
-
-</div>
-
+    </div>
+        <button type="submit" class="btn btn-secondary my-2 my-sm-0">Buscar</button>
+}
 <br>
 <p>
     <a asp-action="Create" class="btn btn-primary">Nueva publicación</a>
@@ -27,23 +26,23 @@
 
 @foreach (var item in Model)
 {
-    <div class="card">
-        <h5 class="card-header">
-            @Html.DisplayFor(modelItem => item.User.UserName)
-            <br>
-            Configurar TimeAgo
-            @Html.DisplayFor(modelItem => item.CreatedAt)
-
-        </h5>
+    <div class="card border-light mb-3">
+        <div class="card-header">
+            <h5>
+                @Html.DisplayFor(modelItem => item.User.UserName)
+                <br>
+                Configurar TimeAgo
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </h5>
+        </div>
         <div class="card-body">
-            <h5 class="card-title">@Html.DisplayFor(modelItem => item.Description)</h5>
+            <h4 class="card-title">@Html.DisplayFor(modelItem => item.Description)</h4>
             <p class="card-text">Estado: @Html.DisplayFor(modelItem => item.State)</p>
             @*<a href="#" class="btn btn-primary">Go somewhere</a>*@
-            <td>
-                <a asp-action="Details" asp-route-id="@item.Id">Ver detalles</a> |
-                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
-            </td>
+
+            <a asp-action="Details" asp-route-id="@item.Id">Ver detalles</a> |
+            <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+            <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
         </div>
     </div>
     <br>
