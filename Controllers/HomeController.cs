@@ -20,7 +20,14 @@ namespace RafaelaColabora.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            // TODO: The model to be passed to the view and ultimately to the blazor component
+            ApplicationUser aperson = new ApplicationUser()
+            {
+                FirstName = "Wael",
+                LastName = "kdouh"
+            };
+
+            return View(aperson);
         }
 
         public IActionResult Privacy()

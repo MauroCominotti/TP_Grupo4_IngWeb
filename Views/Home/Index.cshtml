@@ -1,4 +1,9 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@using RafaelaColabora.Models;
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -6,3 +11,18 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <component type="typeof(CreatePost)" render-mode="ServerPrerendered" />
+}
+else
+{
+    <p>
+        <a asp-controller="Posts" asp-action="Create">Create New</a>
+    </p>
+}
+
+@*<component type="typeof(Person)" render-mode="ServerPrerendered"
+    param-APerson="Model" />*@
+

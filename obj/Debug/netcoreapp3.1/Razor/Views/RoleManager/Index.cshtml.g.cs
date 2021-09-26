@@ -26,8 +26,15 @@ using RafaelaColabora.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 4 "C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\Views\_ViewImports.cshtml"
+using RafaelaColabora.Components.Pages;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"b6b269d4a55f45c31a37c1f02a1be0793d277e7c", @"/Views/RoleManager/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"ffdcddb5edeae6b5f860498294ac93472ac7f759", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"3b171665dfce5904f69da0bd1ee098df340217af", @"/Views/_ViewImports.cshtml")]
     public class Views_RoleManager_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<List<Microsoft.AspNetCore.Identity.IdentityRole>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("method", "post", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -77,7 +84,7 @@ using RafaelaColabora.Models;
 #line hidden
 #nullable disable
             WriteLiteral("    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b6b269d4a55f45c31a37c1f02a1be0793d277e7c4775", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b6b269d4a55f45c31a37c1f02a1be0793d277e7c4987", async() => {
                 WriteLiteral("\r\n        <div class=\"input-group\">\r\n            <input name=\"roleName\" class=\"form-control w-25\">\r\n            <span class=\"input-group-btn\">\r\n                <button class=\"btn btn-info\">Add New Role</button>\r\n            </span>\r\n        </div>\r\n    ");
             }
             );

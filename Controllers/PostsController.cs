@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -64,6 +65,7 @@ namespace RafaelaColabora.Controllers
         }
 
         // GET: Posts/Create
+        [Authorize(Roles = "Basic,Moderator,Admin,SuperAdmin")]
         public IActionResult Create()
         {
             ViewData["FKUserId"] = new SelectList(_context.ApplicationUsers, "Id", "UserName");
@@ -76,6 +78,7 @@ namespace RafaelaColabora.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Basic,Moderator,Admin,SuperAdmin")]
         public async Task<IActionResult> Create([Bind("Id,UserId,CategoryId,State,Description,Links,Phone,AlternativePhone,AlternativeEmail,Photo,CreatedAt")] Post post)
         {
             if (ModelState.IsValid)
@@ -89,6 +92,7 @@ namespace RafaelaColabora.Controllers
         }
 
         // GET: Posts/Edit/5
+        [Authorize(Roles = "Basic,Moderator,Admin,SuperAdmin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -110,6 +114,7 @@ namespace RafaelaColabora.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Basic,Moderator,Admin,SuperAdmin")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,CategoryId,State,Description,Links,Phone,AlternativePhone,AlternativeEmail,Photo,CreatedAt")] Post post)
         {
             if (id != post.Id)
@@ -142,6 +147,7 @@ namespace RafaelaColabora.Controllers
         }
 
         // GET: Posts/Delete/5
+        [Authorize(Roles = "Basic,Moderator,Admin,SuperAdmin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -163,6 +169,7 @@ namespace RafaelaColabora.Controllers
         // POST: Posts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Basic,Moderator,Admin,SuperAdmin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var post = await _context.Posts.FindAsync(id);

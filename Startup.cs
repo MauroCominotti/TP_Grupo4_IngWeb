@@ -38,6 +38,7 @@ namespace RafaelaColabora
                     .AddDefaultUI()
                     .AddDefaultTokenProviders();
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddServerSideBlazor();
             services.AddControllersWithViews()
                     .AddNewtonsoftJson(options => 
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
@@ -77,8 +78,9 @@ namespace RafaelaColabora
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Posts}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+                endpoints.MapBlazorHub();
             });
         }
     }
