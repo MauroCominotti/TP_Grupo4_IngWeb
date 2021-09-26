@@ -8763,11 +8763,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Juan Pablo Carena\\Desktop\\TP Ing Web\\RafaelaColabora.csproj",
+      "projectUniqueName": "C:\\Users\\Juan Pablo Carena\\Desktop\\Clone vs2\\RafaelaColabora.csproj",
       "projectName": "RafaelaColabora",
-      "projectPath": "C:\\Users\\Juan Pablo Carena\\Desktop\\TP Ing Web\\RafaelaColabora.csproj",
+      "projectPath": "C:\\Users\\Juan Pablo Carena\\Desktop\\Clone vs2\\RafaelaColabora.csproj",
       "packagesPath": "C:\\Users\\Juan Pablo Carena\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Juan Pablo Carena\\Desktop\\TP Ing Web\\obj\\",
+      "outputPath": "C:\\Users\\Juan Pablo Carena\\Desktop\\Clone vs2\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

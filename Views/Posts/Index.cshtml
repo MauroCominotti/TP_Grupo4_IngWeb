@@ -1,10 +1,12 @@
-﻿@model IEnumerable<RafaelaColabora.Models.Post>
+﻿
+
+@model IEnumerable<RafaelaColabora.Models.Post>
 
 @{
     ViewData["Title"] = "Rafaela Colabora";
 }
 
-<h1>Index</h1>
+<h1>Rafaela Colabora</h1>
 
 <div class="pull-right">
     @using (Html.BeginForm("Index", "Posts", FormMethod.Post))
@@ -19,85 +21,30 @@
 
 <br>
 <p>
-    <a asp-action="Create" class="btn-primary">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Nueva publicación</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CategoryId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.State)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            @*<th>
-                    @Html.DisplayNameFor(model => model.Links)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Phone)
-                </th>*@
-            @*<th>
-                    @Html.DisplayNameFor(model => model.AlternativePhone)
-                </th>*@
-            @*<th>
-                    @Html.DisplayNameFor(model => model.AlternativeEmail)
-                </th>*@
-            @*<th>
-                    @Html.DisplayNameFor(model => model.Photo)
-                </th>*@
-            @*<th>
-                    @Html.DisplayNameFor(model => model.CreatedAt)
-                </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.User)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
 
-                    @Html.DisplayFor(modelItem => item.Category.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.State)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                @*<td>
-                        @Html.DisplayFor(modelItem => item.Links)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Phone)
-                    </td>*@
-                @*<td>
-                        @Html.DisplayFor(modelItem => item.AlternativePhone)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AlternativeEmail)
-                    </td>*@
-                @*<td>
-                        @Html.DisplayFor(modelItem => item.Photo)
-                    </td>*@
-                @*<td>
-                        @Html.DisplayFor(modelItem => item.CreatedAt)
-                    </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.UserName)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+
+@foreach (var item in Model)
+{
+    <div class="card">
+        <h5 class="card-header">
+            @Html.DisplayFor(modelItem => item.User.UserName)
+            <br>
+            Configurar TimeAgo
+            @Html.DisplayFor(modelItem => item.CreatedAt)
+
+        </h5>
+        <div class="card-body">
+            <h5 class="card-title">@Html.DisplayFor(modelItem => item.Description)</h5>
+            <p class="card-text">Estado: @Html.DisplayFor(modelItem => item.State)</p>
+            @*<a href="#" class="btn btn-primary">Go somewhere</a>*@
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Ver detalles</a> |
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+            </td>
+        </div>
+    </div>
+    <br>
+}
