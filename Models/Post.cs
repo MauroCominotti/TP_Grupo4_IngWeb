@@ -21,8 +21,11 @@ namespace RafaelaColabora.Models
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        [Required]
         public string UserId { get; set; }
+        [Required]
         public int CategoryId { get; set; }
+        [Required]
         public string Description { get; set; }
         public string Links { get; set; }
         public string Phone { get; set; }

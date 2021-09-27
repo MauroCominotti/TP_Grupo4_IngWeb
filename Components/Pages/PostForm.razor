@@ -11,7 +11,7 @@
     <div class="form-group">
         <label>UserId:</label>
         <div>
-            <input type="text" class="form-control" disabled value="@post.UserId" />
+            <input type="text" class="form-control" disabled value="@FKUsername" />
             <ValidationMessage For="@(() => post.UserId)" />
         </div>
     </div>
@@ -66,4 +66,6 @@
     [Parameter] public Post post { get; set; }
     [Parameter] public string ButtonText { get; set; } = "Save";
     [Parameter] public EventCallback OnValidSubmit { get; set; }
+    [Parameter] 
+    public string FKUsername { get; set; }
 }

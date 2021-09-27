@@ -451,4 +451,8 @@ C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\obj\Debug\netc
 C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\obj\Debug\netcoreapp3.1\RafaelaColabora.dll
 C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\obj\Debug\netcoreapp3.1\RafaelaColabora.pdb
 C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\obj\Debug\netcoreapp3.1\RafaelaColabora.genruntimeconfig.cache
+C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\bin\Debug\netcoreapp3.1\System.Net.Http.Json.dll
+C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\bin\Debug\netcoreapp3.1\System.Text.Json.dll
+C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\obj\Debug\netcoreapp3.1\RazorDeclaration\Components\Pages\PostGetAll.razor.g.cs
+C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\obj\Debug\netcoreapp3.1\Razor\Components\Pages\PostGetAll.razor.g.cs
 C:\Users\mauro\Desktop\UCSE\4toAño\IngenieriaWeb\RafaelaColabora\obj\Debug\netcoreapp3.1\RafaelaColabora.csproj.AssemblyReference.cache

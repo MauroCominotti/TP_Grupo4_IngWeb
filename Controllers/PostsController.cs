@@ -29,6 +29,14 @@ namespace RafaelaColabora.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
+        // GET: Posts/GetPosts
+        [HttpGet]
+        public async Task<ActionResult> GetPosts()
+        {
+            var applicationDbContext = _context.Posts.Include(p => p.User).Include(p => p.Category);
+            return StatusCode(200, await applicationDbContext.ToListAsync());
+        }
+
         // GET: Posts/:cadena
         [HttpPost()]
         public async Task<ActionResult> Index(string cadena)
@@ -109,15 +117,20 @@ namespace RafaelaColabora.Controllers
 
         // POST: Posts/CreatePost
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Basic,Moderator,Admin,SuperAdmin")]
-        public async Task<IActionResult> CreatePost([Bind("Id,UserId,CategoryId,State,Description,Links,Phone,AlternativePhone,AlternativeEmail,Photo,CreatedAt")] Post post)
+        //[ValidateAntiForgeryToken]
+        //[Authorize(Roles = "Basic,Moderator,Admin,SuperAdmin")]
+        public async Task<ActionResult> CreatePost([FromBody] Post post)
         {
             if (ModelState.IsValid)
             {
+                var selectedCategory = _context.Category.FindAsync(post.CategoryId);
+                if (selectedCategory == null || selectedCategory is {})
+                {
+                    return BadRequest("Associated category not found.");
+                }
                 _context.Add(post);
                 await _context.SaveChangesAsync();
-                return StatusCode(400, post);
+                return StatusCode(200, post);
             }
             return BadRequest();
         }

@@ -32,7 +32,6 @@ namespace RafaelaColabora
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHttpClient();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -43,20 +42,26 @@ namespace RafaelaColabora
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddServerSideBlazor().AddCircuitOptions(option => { option.DetailedErrors = true; }); ;
 
+
+            //services.AddHttpClient();
             // Server Side Blazor doesn't register HttpClient by default
-            if (!services.Any(x => x.ServiceType == typeof(HttpClient)))
+            //if (!services.Any(x => x.ServiceType == typeof(HttpClient)))
+            //{
+            //    // Setup HttpClient for server side in a client side compatible fashion
+            //    services.AddScoped<HttpClient>(s =>
+            //    {
+            //        // Creating the URI helper needs to wait until the JS Runtime is initialized, so defer it.      
+            //        var uriHelper = s.GetRequiredService<NavigationManager>();
+            //        return new HttpClient
+            //        {
+            //            BaseAddress = new Uri(uriHelper.BaseUri)
+            //        };
+            //    });
+            //}
+            services.AddHttpClient<PostsService>(client =>
             {
-                // Setup HttpClient for server side in a client side compatible fashion
-                services.AddScoped<HttpClient>(s =>
-                {
-                    // Creating the URI helper needs to wait until the JS Runtime is initialized, so defer it.      
-                    var uriHelper = s.GetRequiredService<NavigationManager>();
-                    return new HttpClient
-                    {
-                        BaseAddress = new Uri(uriHelper.BaseUri)
-                    };
-                });
-            }
+                client.BaseAddress = new Uri("https://localhost:5001/");
+            });
 
             services.AddControllersWithViews()
                     .AddNewtonsoftJson(options => 

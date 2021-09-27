@@ -9,32 +9,38 @@
 
 <div class="text-center">
     <h1 class="display-4">Rafaela Colabora</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
 @*<div style="height: 92vh"></div>
-<div class="jumbotron" 
-     style="height: 92vh;
-     margin: 0rem -0.7rem;
-     position: absolute;
-     left: 0;
-     top: 8vh;
-     width: 100%;
-     margin: 0;
-     background-image: url('https://fondosmil.com/fondo/7756.jpg');
-     background-position: center;
-     background-repeat: no-repeat;
-     background-size: cover;">
+    <div class="jumbotron"
+         style="height: 92vh;
+         margin: 0rem -0.7rem;
+         position: absolute;
+         left: 0;
+         top: 8vh;
+         width: 100%;
+         margin: 0;
+         background-image: url('https://fondosmil.com/fondo/7756.jpg');
+         background-position: center;
+         background-repeat: no-repeat;
+         background-size: cover;">
 
-    <div class="container text-center">
-        <h1>My Portfolio</h1>
-        <p>Some text that represents "Me"...</p>
-    </div>
-</div>*@
+        <div class="container text-center">
+            <h1>My Portfolio</h1>
+            <p>Some text that represents "Me"...</p>
+        </div>
+    </div>*@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <component type="typeof(PostCreate)" render-mode="ServerPrerendered" param-FKUserId="ViewBag.FKUserId"/>
+    <component type="typeof(PostCreate)" 
+               render-mode="ServerPrerendered" 
+               param-FKUserId="ViewBag.FKUserId"
+               param-FKUsername="ViewBag.FKUsername"/>
+    <br />
+    <br />
+
+    <component type="typeof(PostGetAll)" render-mode="ServerPrerendered" />
 }
 else
 {

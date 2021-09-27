@@ -1,9 +1,16 @@
-﻿@*@inject HttpClient http*@
-@inject IHttpClientFactory _httpClientFicatory;
-@inject NavigationManager uriHelper
-@*@using System.Net.Http*@
+﻿@*@inject IHttpClientFactory _httpClientFicatory;*@
+@*@inject NavigationManager uriHelper
+    @using System.Net.Http
+    @inject HttpClient http
+    @using System.Net.Http.Json;*@
 
-<PostForm ButtonText="Create Developer" post="@post" OnValidSubmit="@CreatePost" />
+@using RafaelaColabora.Services
+@inject PostsService _postsService
+
+
+<PostForm ButtonText="Create Post" post="@post" OnValidSubmit="@CreatePost" FKUsername="@FKUsername" />
+
+
 @*<component type="typeof(PostForm)"
     render-mode="ServerPrerendered"
     param-ButtonText="Create Developer"
@@ -15,29 +22,35 @@
     [Parameter]
     public string FKUserId { get; set; }
 
+    [Parameter]
+    public string FKUsername { get; set; }
+
     Post post = new Post();
 
     protected override async Task OnInitializedAsync()
     {
         post.UserId = FKUserId;
-        //todos = await _jsonPlaceHolderClient.GetTodos();
     }
 
     async Task CreatePost()
     {
-        //await HttpClient.PostAsJsonAsync("/Posts/CreatePost", post);
+        var result = await _postsService.PostPosts(post);
+        Console.WriteLine(post);
+        Console.WriteLine("My debug output.");
 
-        //var jsonInString = JsonConvert.SerializeObject(post)
-        //await http.PostAsync("/Posts/CreatePost", new StringContent(jsonInString, Encoding.UTF8, "application/json"));
+        //await http.PostAsJsonAsync("/Posts/CreatePost", post);
 
-        var postItemJson = new StringContent(
-        Newtonsoft.Json.JsonConvert.SerializeObject(@post),
-        System.Text.Encoding.UTF8,
-        "application/json");
-        var request = new HttpRequestMessage(HttpMethod.Post, "https://localhost:5001/Posts/CreatePost");
-        request.Content = postItemJson;
-        var httpClient = _httpClientFicatory.CreateClient();
-        var response = await httpClient.SendAsync(request);
+        //var jsonInString = Newtonsoft.Json.JsonConvert.SerializeObject(post);
+        //var response = await http.PostAsync("/Posts/CreatePost", new StringContent(jsonInString, System.Text.Encoding.UTF8, "application/json"));
+
+        //var postItemJson = new StringContent(
+        //Newtonsoft.Json.JsonConvert.SerializeObject(@post),
+        //System.Text.Encoding.UTF8,
+        //"application/json");
+        //var request = new HttpRequestMessage(HttpMethod.Post, "https://localhost:5001/Posts/CreatePost");
+        //request.Content = postItemJson;
+        //var httpClient = _httpClientFicatory.CreateClient();
+        //var response = await httpClient.SendAsync(request);
 
         //uriHelper.NavigateTo("/Posts/");
     }
