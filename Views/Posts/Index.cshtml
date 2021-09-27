@@ -16,7 +16,7 @@
             </span>
         </div>
     </div>
-        <button type="submit" class="btn btn-secondary my-2 my-sm-0">Buscar</button>
+    <button type="submit" class="btn btn-secondary my-2 my-sm-0">Buscar</button>
 }
 <br>
 <p>
@@ -40,9 +40,15 @@
             <p class="card-text">Estado: @Html.DisplayFor(modelItem => item.State)</p>
             @*<a href="#" class="btn btn-primary">Go somewhere</a>*@
 
-            <a asp-action="Details" asp-route-id="@item.Id">Ver detalles</a> |
-            <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-            <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+            <a asp-action="Details" asp-route-id="@item.Id" style=" margin-right: 1rem; text-decoration: none;">
+                <i class="fa fa-eye" style="font-size:22px;" aria-hidden="true"></i>
+            </a>
+            <a asp-action="Edit" asp-route-id="@item.Id" style=" margin-right: 1rem; text-decoration: none;">
+                <i class="fa fa-pencil-alt" style="font-size:22px;" aria-hidden="true"></i>
+            </a>
+            <a asp-action="Delete" asp-route-id="@item.Id" style=" margin-right: 1rem; text-decoration: none;">
+                <i class="fa fa-trash-alt" style="font-size:22px;" aria-hidden="true"></i>
+            </a>
         </div>
     </div>
     <br>

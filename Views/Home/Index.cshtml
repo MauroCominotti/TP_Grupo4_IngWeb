@@ -32,15 +32,9 @@
     </div>
 </div>*@
 
-
-
-
-
-
-
 @if (SignInManager.IsSignedIn(User))
 {
-    <component type="typeof(CreatePost)" render-mode="ServerPrerendered" />
+    <component type="typeof(PostCreate)" render-mode="ServerPrerendered" param-FKUserId="ViewBag.FKUserId"/>
 }
 else
 {

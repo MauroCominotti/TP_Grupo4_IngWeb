@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
@@ -14,6 +15,7 @@ using RafaelaColabora.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace RafaelaColabora
@@ -30,6 +32,7 @@ namespace RafaelaColabora
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpClient();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -38,7 +41,23 @@ namespace RafaelaColabora
                     .AddDefaultUI()
                     .AddDefaultTokenProviders();
             services.AddTransient<IEmailSender, EmailSender>();
-            services.AddServerSideBlazor();
+            services.AddServerSideBlazor().AddCircuitOptions(option => { option.DetailedErrors = true; }); ;
+
+            // Server Side Blazor doesn't register HttpClient by default
+            if (!services.Any(x => x.ServiceType == typeof(HttpClient)))
+            {
+                // Setup HttpClient for server side in a client side compatible fashion
+                services.AddScoped<HttpClient>(s =>
+                {
+                    // Creating the URI helper needs to wait until the JS Runtime is initialized, so defer it.      
+                    var uriHelper = s.GetRequiredService<NavigationManager>();
+                    return new HttpClient
+                    {
+                        BaseAddress = new Uri(uriHelper.BaseUri)
+                    };
+                });
+            }
+
             services.AddControllersWithViews()
                     .AddNewtonsoftJson(options => 
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);

@@ -1,0 +1,69 @@
+﻿<EditForm Model="@post" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator />
+    @*<div class="form-group">
+            <label for="Gender" class="control-label"></label>
+            <select @bind="@post.Category" class="form-control">
+                <option value="">-Select Category</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+        </div>*@
+    <div class="form-group">
+        <label>UserId:</label>
+        <div>
+            <input type="text" class="form-control" disabled value="@post.UserId" />
+            <ValidationMessage For="@(() => post.UserId)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Descripcion:</label>
+        <div>
+            <InputText class="form-control" @bind-Value="@post.Description" />
+            <ValidationMessage For="@(() => post.Description)" />
+        </div>
+    </div>
+    <div class="form-group ">
+        <div>
+            <label>Links:</label>
+            <div>
+                <InputText class="form-control" @bind-Value="@post.Links" />
+                <ValidationMessage For="@(() => post.Links)" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group ">
+        <div>
+            <label>Phone:</label>
+            <div>
+                <InputText class="form-control" @bind-Value="@post.Phone" />
+                <ValidationMessage For="@(() => post.Phone)" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group ">
+        <div>
+            <label>AlternativePhone:</label>
+            <div>
+                <InputText class="form-control" @bind-Value="@post.AlternativePhone" />
+                <ValidationMessage For="@(() => post.AlternativePhone)" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group ">
+        <div>
+            <label>AlternativeEmail:</label>
+            <div>
+                <InputText class="form-control" @bind-Value="@post.AlternativeEmail" />
+                <ValidationMessage For="@(() => post.AlternativeEmail)" />
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success">
+        @ButtonText
+    </button>
+</EditForm>
+@code {
+    [Parameter] public Post post { get; set; }
+    [Parameter] public string ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+}

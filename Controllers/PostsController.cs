@@ -107,6 +107,21 @@ namespace RafaelaColabora.Controllers
             return View(post);
         }
 
+        // POST: Posts/CreatePost
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Basic,Moderator,Admin,SuperAdmin")]
+        public async Task<IActionResult> CreatePost([Bind("Id,UserId,CategoryId,State,Description,Links,Phone,AlternativePhone,AlternativeEmail,Photo,CreatedAt")] Post post)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(post);
+                await _context.SaveChangesAsync();
+                return StatusCode(400, post);
+            }
+            return BadRequest();
+        }
+
         // GET: Posts/Edit/5
         [Authorize(Roles = "Basic,Moderator,Admin,SuperAdmin")]
         public async Task<IActionResult> Edit(int? id)

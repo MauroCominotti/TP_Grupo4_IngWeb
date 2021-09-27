@@ -40,6 +40,7 @@
           "Microsoft.EntityFrameworkCore.Tools": "3.1.18",
           "Microsoft.Extensions.Identity.Stores": "3.1.15",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "3.1.5",
+          "Newtonsoft.Json": "12.0.2",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "3.1.0.0",
