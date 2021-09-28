@@ -31,7 +31,7 @@ namespace RafaelaColabora.Services
 
         public async Task<Post> PostPosts(Post post)
         {
-            var response = await _httpClient.PostAsJsonAsync("https://localhost:5001/Posts/CreatePost", post);
+            var response = await _httpClient.PostAsJsonAsync("https://rafaelacolabora.azurewebsites.net/Posts/CreatePost", post);
             response.EnsureSuccessStatusCode();
             return post;
         }

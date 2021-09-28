@@ -1,4 +1,4 @@
-﻿@model RafaelaColabora.Models.Post
+﻿@model RafaelaColabora.Models.PostViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="UserId" class="control-label"></label>
@@ -22,12 +22,12 @@
             </div>
             @*Ejemplo de como mostrar el estado del posteo, se usará luego para los Moderadores*@
             @*<div class="form-group">
-                <label asp-for="State" class="control-label"></label>
-                <select asp-for="State" class="form-control" asp-items="Html.GetEnumSelectList<RafaelaColabora.Enums.State>()">
-                    <option>Seleccione el estado:</option>
-                </select>
-                <span asp-validation-for="State" class="text-danger"></span>
-            </div>*@
+                    <label asp-for="State" class="control-label"></label>
+                    <select asp-for="State" class="form-control" asp-items="Html.GetEnumSelectList<RafaelaColabora.Enums.State>()">
+                        <option>Seleccione el estado:</option>
+                    </select>
+                    <span asp-validation-for="State" class="text-danger"></span>
+                </div>*@
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
                 <input asp-for="Description" class="form-control" />
@@ -53,11 +53,31 @@
                 <input asp-for="AlternativeEmail" class="form-control" />
                 <span asp-validation-for="AlternativeEmail" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Photo" class="control-label"></label>
-                <input asp-for="Photo" class="form-control" />
-                <span asp-validation-for="Photo" class="text-danger"></span>
+            @*<div class="form-group">
+                    <label asp-for="Photo" class="control-label"></label>
+                    <input asp-for="Photo" class="form-control" />
+                    <span asp-validation-for="Photo" class="text-danger"></span>
+                </div>*@
+
+            @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+            <div class="form-group" style="width: 100%">
+                <label asp-for="Photo" style="width: 100%;"></label>
+                @*@if (Model.Photo != null)
+                {
+                    <img id="profilePicture" style="width:100%;height:350px; object-fit:cover" src="data:image/*;base64,@(Convert.ToBase64String(Model.Photo))">
+                }
+                else
+                {*@
+                    <img id="profilePicture" style="width:100%;height:350px; object-fit: cover" src="https://i.stack.imgur.com/l60Hf.png">
+                @*}*@
+                <input type="file"
+                       accept=".png,.jpg,.jpeg,.gif,.tif"
+                       asp-for="Photo"
+                       class="form-control mt-3"
+                       onchange="document.getElementById('profilePicture').src = window.URL.createObjectURL(this.files[0])" />
+                @*<span asp-validation-for="Photo" class="text-danger"></span>*@
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

@@ -11,6 +11,16 @@
     <h1 class="display-4">Rafaela Colabora</h1>
 </div>
 
+<br />
+<br />
+
+<component type="typeof(PostCreate)"
+           render-mode="ServerPrerendered"
+           param-FKUserId="ViewBag.FKUserId"
+           param-FKUsername="ViewBag.FKUsername"
+           param-IsRegistered="false" />
+           @*param-IsRegistered="SignInManager.IsSignedIn(User)" />*@
+
 @*<div style="height: 92vh"></div>
     <div class="jumbotron"
          style="height: 92vh;
@@ -30,24 +40,6 @@
             <p>Some text that represents "Me"...</p>
         </div>
     </div>*@
-
-<br />
-<br />
-
-@if (SignInManager.IsSignedIn(User))
-{
-    <component type="typeof(Home)"
-               render-mode="ServerPrerendered"
-               param-FKUserId="ViewBag.FKUserId"
-               param-FKUsername="ViewBag.FKUsername" />
-}
-else
-{
-    <p>
-        <a asp-controller="Posts" asp-action="Create">Create New</a>
-    </p>
-    <component type="typeof(PostGetAll)" render-mode="ServerPrerendered" />
-}
 
 @section scripts{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js"></script>

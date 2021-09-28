@@ -31,13 +31,15 @@ namespace RafaelaColabora.Controllers
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
-            if (user == null)
+            //if (user == null)
+            //{
+            //    return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            //}
+            if (user != null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                ViewData["FKUserId"] = user.Id;
+                ViewData["FKUsername"] = user.UserName;
             }
-
-            ViewData["FKUserId"] = user.Id;
-            ViewData["FKUsername"] = user.UserName;
             return View();
         }
 

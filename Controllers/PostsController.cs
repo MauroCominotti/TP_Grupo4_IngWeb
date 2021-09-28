@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -126,11 +128,25 @@ namespace RafaelaColabora.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Basic,Moderator,Admin,SuperAdmin")]
-        public async Task<IActionResult> Create([Bind("Id,UserId,CategoryId,State,Description,Links,Phone,AlternativePhone,AlternativeEmail,Photo,CreatedAt")] Post post)
+        public async Task<IActionResult> Create([Bind("Id,UserId,CategoryId,State,Description,Links,Phone,AlternativePhone,AlternativeEmail,Photo,CreatedAt")] PostViewModel post)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(post);
+                Post postToSend = new Post();
+                IFormFile file = post.Photo;
+                using (var dataStream = new MemoryStream())
+                {
+                    await file.CopyToAsync(dataStream);
+                    postToSend.Photo = dataStream.ToArray();
+                }
+                postToSend.UserId = post.UserId;
+                postToSend.CategoryId = post.CategoryId;
+                postToSend.Description = post.Description;
+                postToSend.Links = post.Links;
+                postToSend.Phone = post.Phone;
+                postToSend.AlternativePhone = post.AlternativePhone;
+                postToSend.AlternativeEmail = post.AlternativeEmail;
+                _context.Add(postToSend);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -142,7 +158,7 @@ namespace RafaelaColabora.Controllers
         [HttpPost]
         //[ValidateAntiForgeryToken]
         //[Authorize(Roles = "Basic,Moderator,Admin,SuperAdmin")]
-        public async Task<ActionResult> CreatePost([FromBody] Post post)
+        public async Task<ActionResult> CreatePost([FromBody] PostViewModel post)
         {
             if (ModelState.IsValid)
             {

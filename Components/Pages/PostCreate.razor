@@ -17,22 +17,31 @@
 
 <br>
 
-<div id="accordion">
-    <div class="card">
-        <div class="card-header">
-            <h5>
-                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne">
-                    Crear Nuevo Post!
-                </button>
-            </h5>
-        </div>
-        <div id="collapseOne" class="collapse" data-parent="#accordion">
-            <div class="card-body">
-                <PostForm ButtonText="Create Post" post="@post" OnValidSubmit="@CreatePost" FKUsername="@FKUsername" />
+@if (IsRegistered)
+{
+    <div id="accordion">
+        <div class="card">
+            <div class="card-header">
+                <h5>
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne">
+                        Crear Nuevo Post!
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseOne" class="collapse" data-parent="#accordion">
+                <div class="card-body">
+                    <PostForm ButtonText="Create Post" post="@post" OnValidSubmit="@CreatePost" FKUsername="@FKUsername" />
+                </div>
             </div>
         </div>
     </div>
-</div>
+}
+else
+{
+    <p>
+        <a href="Posts/Create">Create New</a>
+    </p>
+}
 
 <br />
 <br />
@@ -44,49 +53,49 @@
         <div class="col d-flex">
             @foreach (var post in posts)
             {
-                <div class="card border-success m-3 w-50">
-                    <div class="card-header d-flex">
-                        <h6 class="m-0">
-                            @if (post.User.ProfilePicture != null)
-                            {
-                                <img style="width:40px;height:40px; object-fit:cover; border-radius:30px" src="data:image/*;base64,@(Convert.ToBase64String(post.User.ProfilePicture))">
-                            }
-                            @post.User.UserName · <small>@GetConvertedDate(post.CreatedAt)</small> · <span class="badge bg-info">@post.Category.Description</span>
-                        </h6>
-                    </div>
-                    @*@if (post.Photo != null)
+            <div class="card border-success m-3 w-50">
+                <div class="card-header d-flex">
+                    <h6 class="m-0">
+                        @if (post.User.ProfilePicture != null)
                         {
-                            <div class="card-img" style="background-image: url('data:image/*;base64,@(Convert.ToBase64String(post.Photo))')"></div>
-                        }*@
-                    <div class="card-body">
-                        <h4 class="card-title">Descripción: @post.Description</h4>
-                        <p class="card-text">Estado: @post.State</p>
-                        <br />
-                        <h4 class="card-title">Links: @post.Links</h4>
-                        <h4 class="card-title">Telefono: @post.Phone</h4>
-                        <h4 class="card-title">Telefono Alternativo: @post.AlternativePhone</h4>
-                        <h4 class="card-title">Email Alternativo: @post.AlternativeEmail</h4>
-                        <br />
-                        <a href="Posts/Details/@post.Id" style=" margin-right: 1rem; text-decoration: none;">
-                            <i class="fa fa-eye" style="font-size:22px;" aria-hidden="true"></i>
-                        </a>
-                        <a href="Posts/Edit/@post.Id" style=" margin-right: 1rem; text-decoration: none;">
-                            <i class="fa fa-pencil-alt" style="font-size:22px;" aria-hidden="true"></i>
-                        </a>
-                        <a href="Posts/Delete/@post.Id" style=" margin-right: 1rem; text-decoration: none;">
-                            <i class="fa fa-trash-alt" style="font-size:22px;" aria-hidden="true"></i>
-                        </a>
-                        @*@if (AlreadyLiked(post.Id) != null)
-                            {
-                                <i class="fa fa-heart" style="font-size:22px; color:red" aria-hidden="true" @onclick="(e => LikePost(post.Id))"></i>
-                            }
-                            else
-                            {
-                                <i class="fa fa-heart" style="font-size:22px; color:white" aria-hidden="true" @onclick="(e => LikePost(post.Id))"></i>
-                            }*@
-
-                    </div>
+                            <img style="width:40px;height:40px; object-fit:cover; border-radius:30px" src="data:image/*;base64,@(Convert.ToBase64String(post.User.ProfilePicture))">
+                        }
+                        @post.User.UserName · <small>@GetConvertedDate(post.CreatedAt)</small> · <span class="badge bg-info">@post.Category.Description</span>
+                    </h6>
                 </div>
+                @if (post.Photo != null)
+                {
+                    <img src="data:image/*;base64,@(Convert.ToBase64String(post.Photo))">
+                }
+                <div class="card-body">
+                    <h4 class="card-title">Descripción: @post.Description</h4>
+                    <p class="card-text">Estado: @post.State</p>
+                    <br />
+                    <h4 class="card-title">Links: @post.Links</h4>
+                    <h4 class="card-title">Telefono: @post.Phone</h4>
+                    <h4 class="card-title">Telefono Alternativo: @post.AlternativePhone</h4>
+                    <h4 class="card-title">Email Alternativo: @post.AlternativeEmail</h4>
+                    <br />
+                    <a href="Posts/Details/@post.Id" style=" margin-right: 1rem; text-decoration: none;">
+                        <i class="fa fa-eye" style="font-size:22px;" aria-hidden="true"></i>
+                    </a>
+                    <a href="Posts/Edit/@post.Id" style=" margin-right: 1rem; text-decoration: none;">
+                        <i class="fa fa-pencil-alt" style="font-size:22px;" aria-hidden="true"></i>
+                    </a>
+                    <a href="Posts/Delete/@post.Id" style=" margin-right: 1rem; text-decoration: none;">
+                        <i class="fa fa-trash-alt" style="font-size:22px;" aria-hidden="true"></i>
+                    </a>
+                    @*@if (AlreadyLiked(post.Id) != null)
+            {
+                <i class="fa fa-heart" style="font-size:22px; color:red" aria-hidden="true" @onclick="(e => LikePost(post.Id))"></i>
+            }
+            else
+            {
+                <i class="fa fa-heart" style="font-size:22px; color:white" aria-hidden="true" @onclick="(e => LikePost(post.Id))"></i>
+            }*@
+
+                </div>
+            </div>
                 <br>
             }
         </div>
@@ -100,6 +109,10 @@
 
     [Parameter]
     public string FKUsername { get; set; }
+
+    [Parameter]
+    public bool IsRegistered { get; set; }
+
 
     public string SearchValue { get; set; }
 

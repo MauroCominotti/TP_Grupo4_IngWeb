@@ -1,6 +1,11 @@
 ﻿@using RafaelaColabora.Services
 @inject PostsService _postsService
 
+
+<p>
+    <a asp-controller="Posts" asp-action="Create">Create New</a>
+</p>
+
 @if (posts != null)
 {
     @foreach (var post in posts)
