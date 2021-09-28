@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +15,6 @@ namespace RafaelaColabora.Controllers
     public class PostsController : Controller
     {
         private readonly ApplicationDbContext _context;
-
 
         public PostsController(ApplicationDbContext context)
         {
@@ -34,7 +34,7 @@ namespace RafaelaColabora.Controllers
         public async Task<ActionResult> GetPosts()
         {
             var applicationDbContext = _context.Posts.Include(p => p.User).Include(p => p.Category);
-            return StatusCode(200, await applicationDbContext.ToListAsync());
+            return StatusCode(200, await applicationDbContext.OrderByDescending(p => p.CreatedAt).ToListAsync());
         }
 
         // GET: Posts/:cadena
@@ -53,20 +53,43 @@ namespace RafaelaColabora.Controllers
             }
         }
 
+        [HttpGet]
         // GET: Posts/Search/:cadena
-        [HttpPost()]
         public async Task<ActionResult> Search(string cadena)
         {
             var applicationDbContext = _context.Posts.Include(p => p.User).Include(p => p.Category);
 
             if ((cadena == "") || (cadena == null))
             {
-                return StatusCode(200, await applicationDbContext.ToListAsync());
+                return StatusCode(200, await applicationDbContext.OrderByDescending(p => p.CreatedAt).ToListAsync());
             }
             else
             {
-                return StatusCode(200, await applicationDbContext.Where(p => p.Description.Contains(cadena)).ToListAsync());
+                return StatusCode(200, await applicationDbContext.Where(p => p.Description.Contains(cadena)).OrderByDescending(p => p.CreatedAt).ToListAsync());
             }
+        }
+
+        [HttpGet]
+        // GET: Posts/VerifyPostLike/:postId/?userId
+        public async Task<ActionResult> VerifyPostLike([FromQuery] int postId, string userId)
+        {
+            //var post = await _context.Posts
+            //    .Include(p => p.User)
+            //    .Include(p => p.Likes).ThenInclude(l => l.UserId)
+            //    .FirstOrDefaultAsync(m => m.Id == postId && m.Likes.FirstOrDefault(l => l.UserId == userId) != null);
+
+            var post = await _context.Posts
+                .Include(p => p.User)
+                .Include(p => p.Likes)
+                .FirstOrDefaultAsync(m => m.Id == postId && m.Likes.FirstOrDefault(l => l.UserId == userId) != null);
+
+            if (post == null)
+            {
+                return NotFound();
+            }
+
+            return StatusCode(200, post);
+
         }
 
         // GET: Posts/Details/5
@@ -123,8 +146,8 @@ namespace RafaelaColabora.Controllers
         {
             if (ModelState.IsValid)
             {
-                var selectedCategory = _context.Category.FindAsync(post.CategoryId);
-                if (selectedCategory == null || selectedCategory is {})
+                var selectedCategory = await _context.Category.FindAsync(post.CategoryId);
+                if (selectedCategory == null)
                 {
                     return BadRequest("Associated category not found.");
                 }

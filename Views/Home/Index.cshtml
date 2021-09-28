@@ -31,24 +31,24 @@
         </div>
     </div>*@
 
+<br />
+<br />
+
 @if (SignInManager.IsSignedIn(User))
 {
-    <component type="typeof(PostCreate)" 
-               render-mode="ServerPrerendered" 
+    <component type="typeof(Home)"
+               render-mode="ServerPrerendered"
                param-FKUserId="ViewBag.FKUserId"
-               param-FKUsername="ViewBag.FKUsername"/>
-    <br />
-    <br />
-
-    <component type="typeof(PostGetAll)" render-mode="ServerPrerendered" />
+               param-FKUsername="ViewBag.FKUsername" />
 }
 else
 {
     <p>
         <a asp-controller="Posts" asp-action="Create">Create New</a>
     </p>
+    <component type="typeof(PostGetAll)" render-mode="ServerPrerendered" />
 }
 
-@*<component type="typeof(Person)" render-mode="ServerPrerendered"
-    param-APerson="Model" />*@
-
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js"></script>
+}

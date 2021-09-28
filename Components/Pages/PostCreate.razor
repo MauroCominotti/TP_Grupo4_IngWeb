@@ -1,21 +1,97 @@
-﻿@*@inject IHttpClientFactory _httpClientFicatory;*@
-@*@inject NavigationManager uriHelper
-    @using System.Net.Http
-    @inject HttpClient http
-    @using System.Net.Http.Json;*@
-
-@using RafaelaColabora.Services
+﻿@using RafaelaColabora.Services
 @inject PostsService _postsService
+@*@inject NavigationManager NavigationManager*@
 
 
-<PostForm ButtonText="Create Post" post="@post" OnValidSubmit="@CreatePost" FKUsername="@FKUsername" />
+<div class="d-flex">
+    <div class="input-group">
+        <input class="form-control my-0 py-1 lime-border" placeholder="Search" @bind="@SearchValue" />
+        <div class="input-group-append mr-3">
+            <span class="input-group-text">
+                <i class="fas fa-search" aria-hidden="true"></i>
+            </span>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-secondary my-2 my-sm-0" @onclick="SearchValueEntered">Buscar</button>
+</div>
 
+<br>
 
-@*<component type="typeof(PostForm)"
-    render-mode="ServerPrerendered"
-    param-ButtonText="Create Developer"
-    param-post="@post"
-    param-OnValidSubmit="@CreatePost()"/>*@
+<div id="accordion">
+    <div class="card">
+        <div class="card-header">
+            <h5>
+                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne">
+                    Crear Nuevo Post!
+                </button>
+            </h5>
+        </div>
+        <div id="collapseOne" class="collapse" data-parent="#accordion">
+            <div class="card-body">
+                <PostForm ButtonText="Create Post" post="@post" OnValidSubmit="@CreatePost" FKUsername="@FKUsername" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+<br />
+
+@if (posts != null)
+{
+    <div class="row">
+        <div class="col d-flex">
+            @foreach (var post in posts)
+            {
+                <div class="card border-success m-3 w-50">
+                    <div class="card-header d-flex">
+                        <h6 class="m-0">
+                            @if (post.User.ProfilePicture != null)
+                            {
+                                <img style="width:40px;height:40px; object-fit:cover; border-radius:30px" src="data:image/*;base64,@(Convert.ToBase64String(post.User.ProfilePicture))">
+                            }
+                            @post.User.UserName · <small>@GetConvertedDate(post.CreatedAt)</small> · <span class="badge bg-info">@post.Category.Description</span>
+                        </h6>
+                    </div>
+                    @*@if (post.Photo != null)
+                        {
+                            <div class="card-img" style="background-image: url('data:image/*;base64,@(Convert.ToBase64String(post.Photo))')"></div>
+                        }*@
+                    <div class="card-body">
+                        <h4 class="card-title">Descripción: @post.Description</h4>
+                        <p class="card-text">Estado: @post.State</p>
+                        <br />
+                        <h4 class="card-title">Links: @post.Links</h4>
+                        <h4 class="card-title">Telefono: @post.Phone</h4>
+                        <h4 class="card-title">Telefono Alternativo: @post.AlternativePhone</h4>
+                        <h4 class="card-title">Email Alternativo: @post.AlternativeEmail</h4>
+                        <br />
+                        <a href="Posts/Details/@post.Id" style=" margin-right: 1rem; text-decoration: none;">
+                            <i class="fa fa-eye" style="font-size:22px;" aria-hidden="true"></i>
+                        </a>
+                        <a href="Posts/Edit/@post.Id" style=" margin-right: 1rem; text-decoration: none;">
+                            <i class="fa fa-pencil-alt" style="font-size:22px;" aria-hidden="true"></i>
+                        </a>
+                        <a href="Posts/Delete/@post.Id" style=" margin-right: 1rem; text-decoration: none;">
+                            <i class="fa fa-trash-alt" style="font-size:22px;" aria-hidden="true"></i>
+                        </a>
+                        @*@if (AlreadyLiked(post.Id) != null)
+                            {
+                                <i class="fa fa-heart" style="font-size:22px; color:red" aria-hidden="true" @onclick="(e => LikePost(post.Id))"></i>
+                            }
+                            else
+                            {
+                                <i class="fa fa-heart" style="font-size:22px; color:white" aria-hidden="true" @onclick="(e => LikePost(post.Id))"></i>
+                            }*@
+
+                    </div>
+                </div>
+                <br>
+            }
+        </div>
+    </div>
+}
 
 @code {
 
@@ -25,33 +101,50 @@
     [Parameter]
     public string FKUsername { get; set; }
 
+    public string SearchValue { get; set; }
+
     Post post = new Post();
+
+    public List<Post> posts { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         post.UserId = FKUserId;
+        posts = await _postsService.GetPosts();
     }
 
     async Task CreatePost()
     {
-        var result = await _postsService.PostPosts(post);
-        Console.WriteLine(post);
-        Console.WriteLine("My debug output.");
+        if (post.CategoryId != 0)
+        {
+            var result = await _postsService.PostPosts(post);
+            posts = await _postsService.GetPosts();
+        }
+    }
 
-        //await http.PostAsJsonAsync("/Posts/CreatePost", post);
+    async Task LikePost(int id)
+    {
+        //var result = await _postsService.PostPosts(post);
+        //posts = await _postsService.GetPosts();
+    }
 
-        //var jsonInString = Newtonsoft.Json.JsonConvert.SerializeObject(post);
-        //var response = await http.PostAsync("/Posts/CreatePost", new StringContent(jsonInString, System.Text.Encoding.UTF8, "application/json"));
+    async Task<Post> AlreadyLiked(int id)
+    {
+        var response = await _postsService.VerifyPostLike(id, FKUserId);
+        return response;
+    }
 
-        //var postItemJson = new StringContent(
-        //Newtonsoft.Json.JsonConvert.SerializeObject(@post),
-        //System.Text.Encoding.UTF8,
-        //"application/json");
-        //var request = new HttpRequestMessage(HttpMethod.Post, "https://localhost:5001/Posts/CreatePost");
-        //request.Content = postItemJson;
-        //var httpClient = _httpClientFicatory.CreateClient();
-        //var response = await httpClient.SendAsync(request);
+    async Task SearchValueEntered()
+    {
+        posts = await _postsService.SearchPosts(SearchValue);
+    }
 
-        //uriHelper.NavigateTo("/Posts/");
+    public string GetConvertedDate(DateTime dateCreatedAt)
+    {
+        var dateOne = DateTime.Now;
+        var diff = dateCreatedAt.Subtract(dateOne);
+        if (diff.Hours != 0) return String.Format("Hace {0} horas", diff.Hours * -1);
+        if (diff.Minutes != 0) return String.Format("Hace {0} minutos", diff.Minutes * -1);
+        return String.Format("Hace {0} segundos", diff.Seconds * -1);
     }
 }

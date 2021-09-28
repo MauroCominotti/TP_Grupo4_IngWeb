@@ -4,18 +4,15 @@
 @foreach (var post in posts)
 {
     <div class="card border-success mb-3">
-        <div class="card-header">
-            <h5>
-                @post.User.UserName
-                <br>
-                Configurar TimeAgo
-                @post.CreatedAt
-            </h5>
+        <div class="card-header d-flex">
+            <h6 class="m-0">
+                @post.User.UserName · <small>@GetConvertedDate(post.CreatedAt)</small>
+            </h6>
         </div>
         @*@if (post.Photo != null)
-        {
-            <div class="card-img" style="background-image: url('data:image/*;base64,@(Convert.ToBase64String(post.Photo))')"></div>
-        }*@
+            {
+                <div class="card-img" style="background-image: url('data:image/*;base64,@(Convert.ToBase64String(post.Photo))')"></div>
+            }*@
         <div class="card-body">
             <h4 class="card-title">@post.Description</h4>
             <p class="card-text">Estado: @post.State</p>
@@ -35,10 +32,24 @@
 }
 
 @code {
-    List<Post> posts = new List<Post>();
+    [Parameter]
+    public List<Post> posts { get; set; }
+
+    public string GetConvertedDate(DateTime dateCreatedAt)
+    {
+        var dateOne = DateTime.Now;
+        var diff = dateCreatedAt.Subtract(dateOne);
+        var res = String.Format("Hace {0}:{1}:{2}", diff.Hours, diff.Minutes, diff.Seconds);
+        return res;
+    }
 
     protected override async Task OnInitializedAsync()
     {
         posts = await _postsService.GetPosts();
+    }
+
+    public void RefreshMe()
+    {
+        StateHasChanged();
     }
 }

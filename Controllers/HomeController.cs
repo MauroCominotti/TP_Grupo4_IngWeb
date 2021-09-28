@@ -30,15 +30,6 @@ namespace RafaelaColabora.Controllers
 
         public async Task<IActionResult> Index()
         {
-            // TODO: The model to be passed to the view and ultimately to the blazor component
-            //ApplicationUser aperson = new ApplicationUser()
-            //{
-            //    FirstName = "Wael",
-            //    LastName = "kdouh"
-            //};
-            //User.FindFirst(ClaimTypes.NameIdentifier).Value 
-            //ViewData["FKUserId"] = (await _context.ApplicationUsers.FindAsync(ClaimTypes.NameIdentifier)).Id;
-
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
@@ -47,9 +38,6 @@ namespace RafaelaColabora.Controllers
 
             ViewData["FKUserId"] = user.Id;
             ViewData["FKUsername"] = user.UserName;
-            //ViewData["FKCategoryId"] = "1";
-            //var user = await _userManager.GetUserAsync(HttpContext.User);
-            //ApplicationUser appUser = new ApplicationUser(){ Id = "1"; CategoryId = "1" };
             return View();
         }
 

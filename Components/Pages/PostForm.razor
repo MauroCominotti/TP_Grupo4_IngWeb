@@ -1,18 +1,38 @@
-﻿<EditForm Model="@post" OnValidSubmit="@OnValidSubmit">
+﻿@using RafaelaColabora.Services
+@inject CategoriesService _categoryService
+
+<EditForm Model="@post" OnValidSubmit="@OnValidSubmit">
     <DataAnnotationsValidator />
-    @*<div class="form-group">
-            <label for="Gender" class="control-label"></label>
-            <select @bind="@post.Category" class="form-control">
-                <option value="">-Select Category</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-            </select>
-        </div>*@
     <div class="form-group">
         <label>UserId:</label>
         <div>
             <input type="text" class="form-control" disabled value="@FKUsername" />
             <ValidationMessage For="@(() => post.UserId)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Categoria:</label>
+        <div>
+            @*<InputSelect class="form-control" @bind-Value="@post.CategoryId">
+                    @if (categories != null)
+                    {
+                        @foreach (var category in categories)
+                        {
+                            <option value=@category.Id>@category.Description</option>
+                        }
+                    }
+                </InputSelect>*@
+            <select @bind="post.CategoryId" class="form-control">
+                <option value="">Seleccione una opcion:</option>
+                @if (categories != null)
+                {
+                    @foreach (var category in categories)
+                    {
+                        <option value=@category.Id>@category.Description</option>
+                    }
+                }
+            </select>
+            <ValidationMessage For="@(() => post.CategoryId)" />
         </div>
     </div>
     <div class="form-group">
@@ -62,10 +82,16 @@
         @ButtonText
     </button>
 </EditForm>
+
 @code {
     [Parameter] public Post post { get; set; }
     [Parameter] public string ButtonText { get; set; } = "Save";
     [Parameter] public EventCallback OnValidSubmit { get; set; }
-    [Parameter] 
-    public string FKUsername { get; set; }
+    [Parameter] public string FKUsername { get; set; }
+    public List<Category> categories { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        categories = await _categoryService.GetCategories();
+    }
 }
